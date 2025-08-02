@@ -93,16 +93,21 @@ def setup_logger(name, log_level=logging.INFO):
     logger = logging.getLogger(name)
     logger.setLevel(log_level)
 
-    # 创建一个控制台输出Handler
-    ch = logging.StreamHandler()
-    ch.setLevel(log_level)
+    # 判断是否已经添加了StreamHandler，避免重复添加
+    if not logger.handlers:
+        # 创建一个控制台输出Handler
+        ch = logging.StreamHandler()
+        ch.setLevel(log_level)
 
-    # 创建日志格式
-    formatter = logging.Formatter(
-        '%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s')
-    ch.setFormatter(formatter)
+        # 创建日志格式
+        formatter = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s')
+        ch.setFormatter(formatter)
 
-    # 给logger添加Handler
-    logger.addHandler(ch)
+        # 给logger添加Handler
+        logger.addHandler(ch)
+
+    # 防止日志向父logger传播，避免重复输出
+    logger.propagate = False
 
     return logger
