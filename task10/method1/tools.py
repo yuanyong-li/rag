@@ -2,6 +2,7 @@ import logging
 import requests
 import json
 from openai import OpenAI
+from .config import API_SECRET_KEY, BASE_URL, MODEL_NAME
 
 
 def query_faults(query_text, scene_tag, province_tag="hq", top_k=5, score_threshold=0.5):
@@ -55,11 +56,10 @@ def query_faults(query_text, scene_tag, province_tag="hq", top_k=5, score_thresh
 
 
 def chat_completions4(query):
-    API_SECRET_KEY = "sk-zk25ec58acf44398bd0c18450792ecc97216808f473e2113"
-    BASE_URL = "https://api.zhizengzeng.com/v1/"
+    # 智增增
     client = OpenAI(api_key=API_SECRET_KEY, base_url=BASE_URL)
     resp = client.chat.completions.create(
-        model="qwen3-32b",
+        model=MODEL_NAME,
         messages=[
             {"role": "user", "content": query}
         ]
