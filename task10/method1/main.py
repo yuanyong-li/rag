@@ -140,7 +140,6 @@ def answer_subquestions_with_llm(subquestions_with_docs):
     )
 
     results = []
-    print(subquestions_with_docs)
     for subq, docs in subquestions_with_docs:
         # 处理文档内容
         doc_texts = doc_2_doclist(docs)
@@ -211,7 +210,7 @@ def check_faithfulness_and_relevance(answers_with_docs):
             relevance = False
             faithfulness = False
             evidence_from_document = False
-            print(f"check_faithfulness_and_relevance 返回结果解析异常")
+            logger.error(f"check_faithfulness_and_relevance 返回结果解析异常")
 
         results.append({
             "subquestion": subq,

@@ -47,7 +47,14 @@ def query_faults(query_text, scene_tag, province_tag="hq", top_k=5, score_thresh
         "score_threshold": score_threshold
     }
 
-    response = requests.post(url, headers=headers, data=json.dumps(body))
+    # 添加代理配置，具体代理网址需要查看http://127.0.0.1:18033/proxy.pac里的匹配内容
+    proxies = {
+        'http': 'http://10.141.248.54:8443',
+        'https': 'http://10.141.248.54:8443'
+    }
+
+
+    response = requests.post(url, headers=headers, data=json.dumps(body), proxies=proxies)
     try:
         response.raise_for_status()
         return response.json()
