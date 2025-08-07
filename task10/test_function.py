@@ -6,9 +6,6 @@ import time
 
 def baseline_test(complex_query, scene_tag, k):
     logger = setup_logger("MyLogger", logging.DEBUG)
-    complex_query = "武汉5G高回落小区的主要原因是什么，它们的数量下降了多少，是否有可能通过调整某些技术手段来进一步减少回落现象？"
-    scene_tag = 'wlyh'
-    k = 5
     
     # 用于存储时间统计的列表
     time_stats = []
